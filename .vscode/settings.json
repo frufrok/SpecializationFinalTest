@@ -1,6 +1,5 @@
 {
     "java.project.sourcePaths": [
-        "srs/main/java/HumanFriends",
-        "srs/main/java"
+        "srs/main/java/",
     ]
 }

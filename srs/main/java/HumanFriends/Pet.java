@@ -39,4 +39,20 @@ public class Pet extends Animal {
     public String toString() {
         return String.format("Pet %s the %s", this.name, this.kind);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Pet pet = (Pet) o;
+        boolean toysAreEqual = this.toys.size() == pet.toys.size();
+        if (toysAreEqual) {
+            for (int i = 0; i < this.toys.size(); i++) {
+                toysAreEqual = toysAreEqual && this.toys.get(i).equals(pet.toys.get(i));
+            }
+        }
+        return pet.name.equals(this.name) && pet.kind.equals(this.kind) && pet.birthDate.equals(this.birthDate) && toysAreEqual;
+    }
 }
