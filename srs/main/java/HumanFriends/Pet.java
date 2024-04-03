@@ -33,6 +33,7 @@ public class Pet extends Animal {
     
     public Pet(String name, String kind, LocalDate birthDate) {
         super(name, kind, birthDate);
+        this.subType = "Pet";
     }
 
     @Override

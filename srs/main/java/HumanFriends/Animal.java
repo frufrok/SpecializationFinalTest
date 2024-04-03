@@ -11,6 +11,12 @@ public class Animal {
         return this.id;
     }
 
+    protected String subType;
+
+    public String getSubType() {
+        return this.subType;
+    }
+
     protected String name;
 
     public String getName() {

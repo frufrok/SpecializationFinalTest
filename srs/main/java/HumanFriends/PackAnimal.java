@@ -46,6 +46,7 @@ public class PackAnimal extends Animal {
 
     public PackAnimal(String name, String kind, LocalDate birthDate, int recoveryPeriod) {
         super(name, kind, birthDate);
+        this.subType = "Pack animal";
         this.recoveryPeriod = recoveryPeriod > 0 ? recoveryPeriod : 1;
     }
 
