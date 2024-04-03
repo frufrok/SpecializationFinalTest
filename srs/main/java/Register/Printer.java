@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import HumanFriends.Animal;
 import HumanFriends.Command;
-import HumanFriends.Pet;
 
 public class Printer {
     public static ArrayList<String> getAnimalsTable(Collection<Animal> animals, SortType sortType) {
