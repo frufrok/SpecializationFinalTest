@@ -21,7 +21,7 @@
 
 8. [ООП и Java ✓](https://github.com/frufrok/SpecializationFinalTest/tree/main/srs/main/java/HumanFriends)
 
-9. [Программа-реестр домашних животных ✓](https://github.com/frufrok/SpecializationFinalTest/tree/main/srs/main/java/PetRegister)
+9. [Программа-реестр домашних животных ✓](https://github.com/frufrok/SpecializationFinalTest/tree/main/srs/main/java/Register)
 
 10. [Счетчик животных ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/srs/main/java/HumanFriends/Counter.java)
 
