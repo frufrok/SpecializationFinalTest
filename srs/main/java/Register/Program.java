@@ -1,10 +1,13 @@
-﻿package PetRegister;
+﻿package Register;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import HumanFriends.Animal;
 import HumanFriends.Command;
 import HumanFriends.Counter;
+import HumanFriends.PackAnimal;
 import HumanFriends.Pet;
 
 public class Program {
@@ -30,16 +33,16 @@ public class Program {
                     break;
                 }
                 if (command.equals("a")) {
-                    addPet(register, in);
+                    addAnimal(register, in);
                 }
                 if (command.equals("l")) {
-                    showPets(register, in);
+                    showAnimals(register, in);
                 }
                 if (command.equals("m")) {
                     showCounter();
                 }
                 if (command.equals("s")) {
-                    selectPet(register, in);
+                    selectAnimal(register, in);
                 }
             }
         } catch (Exception e) {
@@ -53,14 +56,58 @@ public class Program {
         pf("%d", Counter.getAnimalsCount());
     }
 
-    private static void addPet(Register register, Scanner in) {
+    private static void addAnimal(Register register, Scanner in) {
         pl("Добавить питомца:");
         String name = readString("Укажите имя:", in);
         String kind = readString("Укажите биологический вид:", in);
         String birthDate = readString("Укажите дату рождения в формате ГГГГ.ММ.ДД", in);
         try {
-            Pet pet = PetParser.parsePet(name, kind, birthDate);
-            register.addPet(pet);
+            boolean isPack;
+            if (register.getKnownPacks().contains(kind) && !register.getKnownPets().contains(kind)) {
+                isPack = true;
+            }
+            else if (!register.getKnownPacks().contains(kind) && register.getKnownPets().contains(kind)) {
+                isPack = false;
+            }
+            else if (register.getKnownPacks().contains(kind) && register.getKnownPets().contains(kind)) {
+                pf("В нашем реестре есть как домашние, так и вьючные животные, вид которых %s", kind);
+                while (true) {
+                    String command = readString(
+                            "Это вьючное животное? Введите 'y', если оно вьючное, или 'n', если оно домашнее:", in);
+                    if (command.equals("y")) {
+                        isPack = true;
+                        break;
+                    }
+                    if (command.equals("n")) {
+                        isPack = false;
+                        break;
+                    }
+                }
+            }
+            else {
+                pf("В реестре нет животных с типом %s", kind);
+                while (true) {
+                    String command = readString(
+                            "Это вьючное животное? Введите 'y', если оно вьючное, или 'n', если оно домашнее:", in);
+                    if (command.equals("y")) {
+                        isPack = true;
+                        break;
+                    }
+                    if (command.equals("n")) {
+                        isPack = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isPack) {
+                PackAnimal pack = AnimalParser.parsePack(name, kind, birthDate);
+                register.addPack(pack);
+            }
+            else{
+                Pet pet = AnimalParser.parsePet(name, kind, birthDate);
+                register.addPet(pet);
+            }
         }
         catch (Exception e) {
             pl("Ошибка добавления питомца:");
@@ -68,7 +115,7 @@ public class Program {
         }
     }
     
-    private static void showPets(Register register, Scanner in) {
+    private static void showAnimals(Register register, Scanner in) {
         pl("Показать список питомцев:");
         while (true) {
             String command = readString("Укажите тип сортировки или введите 'h' для справки", in);
@@ -78,27 +125,33 @@ public class Program {
                 ph("i", "сортировка по ID (по умолчанию)");
                 ph("n", "сортировка по имени");
                 ph("k", "сортировка по виду");
+                ph("t", "сортировка по подтипу (домашние или вьючные)");
                 ph("b", "сортировка по дате рождения");
                 ph("e", "отмена операции");
             }
             if (command.isBlank() || command.equals("i")) {
                 pl("Список питомцев с сортировкой по ID:");
-                pc(Printer.getPetsTable(register.getPets(), SortType.ID));
+                pc(Printer.getAnimalsTable(register.getAnimals(), SortType.ID));
                 break;
             }
             if (command.equals("n")) {
                 pl("Список питомцев с сортировкой по имени:");
-                pc(Printer.getPetsTable(register.getPets(), SortType.NAME));
+                pc(Printer.getAnimalsTable(register.getAnimals(), SortType.NAME));
                 break;
             }
             if (command.equals("k")) {
-                pl("Список питомцев с сортировкой по типу:");
-                pc(Printer.getPetsTable(register.getPets(), SortType.KIND));
+                pl("Список питомцев с сортировкой по виду:");
+                pc(Printer.getAnimalsTable(register.getAnimals(), SortType.KIND));
+                break;
+            }
+            if (command.equals("t")) {
+                pl("Список питомцев с сортировкой по подтипу:");
+                pc(Printer.getAnimalsTable(register.getAnimals(), SortType.SUBTYPE));
                 break;
             }
             if (command.equals("b")) {
                 pl("Список питомцев с сортировкой по дате рождения:");
-                pc(Printer.getPetsTable(register.getPets(), SortType.BIRTHDAY));
+                pc(Printer.getAnimalsTable(register.getAnimals(), SortType.BIRTHDAY));
                 break;
             }
             if (command.equals("e")) {
@@ -108,16 +161,16 @@ public class Program {
         }
     }
 
-    private static void selectPet(Register register, Scanner in) {
+    private static void selectAnimal(Register register, Scanner in) {
         pl("Выбрать питомца:");
         while (true) {
             String command = readString("Введите ID питомца для выбора или 'e' для отмены:", in);
             try {
                 int id = Integer.parseInt(command);
-                HashMap<Integer, Pet> petsByID = new HashMap<>();
-                register.getPets().forEach(pet -> petsByID.put(pet.getID(), pet));
-                if (petsByID.containsKey(id)) {
-                    handlePet(petsByID.get(id), in);
+                HashMap<Integer, Animal> byID = new HashMap<>();
+                register.getAnimals().forEach(x -> byID.put(x.getID(), x));
+                if (byID.containsKey(id)) {
+                    handlePet(byID.get(id), in);
                     break;
                 } else {
                     throw new Exception(String.format("Питомца с ID=%d не существует.", id));
@@ -134,10 +187,12 @@ public class Program {
         }
     }
     
-    public static void handlePet(Pet pet, Scanner in) {
+    public static void handlePet(Animal animal, Scanner in) {
         while (true) {
-            pf("Питомец с ID=%d: Имя %s, Вид %s, Дата рождения %s", pet.getID(), pet.getName(), pet.getKind(),
-                    pet.getBirthDate());
+            pf("Питомец с ID=%d: Имя %s, Вид %s, Подтип %s, Дата рождения %s",
+                    animal.getID(), animal.getName(),
+                    animal.getKind(), animal.getSubType(),
+                    animal.getBirthDate());
             String command = readString("Введите команду или 'h' для получения справки:", in);
             if (command.equals("h")) {
                 pl("Список параметров сортировки:");
@@ -148,12 +203,12 @@ public class Program {
             }
             if (command.equals("l")) {
                 pl("Список команд животного:");
-                for (Command petCommand : pet.getCommands()) {
+                for (Command petCommand : animal.getCommands()) {
                     pl(petCommand.getName());
                 }
             }
             if (command.equals("t")) {
-                teachPet(pet, in);
+                teachAnimal(animal, in);
             }
             if (command.equals("e")) {
                 pl("Выход в главное меню.");
@@ -162,14 +217,14 @@ public class Program {
         }
     }
 
-    public static void teachPet(Pet pet, Scanner in) {
+    public static void teachAnimal(Animal animal, Scanner in) {
         while (true) {
             String commandName = readString("Введите команду для обучения:", in);
             if (commandName == null) {
                 pl("Имя команды не может быть пустым.");
             }
             else {
-                pet.addCommand(new Command(commandName));
+                animal.addCommand(new Command(commandName));
                 pf("Команда %s успешно добавлена.", commandName);
                 break;
             }
@@ -210,5 +265,5 @@ public class Program {
         return result;
     }
 
-    public static String version = "1.0";
+    public static String version = "1.1";
 }
