@@ -1,0 +1,14 @@
+ID,Name,Kind,BirthDate,AgeMonths,OwnerID,IsPet,PetID,Toys,IsPack,PackID,Tasks,Commands
+1,Fido,Dog,2020-01-01,51,5,1,1,"Bone, Frisbee",0,NULL,NULL,"Sit, Roll, Stay"
+2,Whiskers,Cat,2019-05-15,58,5,1,2,"Mouse Toy",0,NULL,NULL,"Scratch, Pounce"
+3,Hammy,Hamster,2021-03-10,36,5,1,3,Wheel,0,NULL,NULL,Spin
+4,Buddy,Dog,2018-12-10,63,2,1,4,NULL,0,NULL,NULL,"Roll, Stay"
+5,Smudge,Cat,2020-02-20,49,3,1,5,NULL,0,NULL,NULL,"Sit, Jump, Pounce, Scratch"
+6,Peanut,Hamster,2021-08-01,32,1,1,6,NULL,0,NULL,NULL,"Hide, Spin"
+7,Bella,Dog,2019-11-11,52,2,1,7,NULL,0,NULL,NULL,"Roll, Stay, Sit"
+8,Oliver,Cat,2020-06-30,45,4,1,8,NULL,0,NULL,NULL,"Pounce, Jump, Scratch"
+9,Thunder,Horse,2015-07-21,104,2,0,NULL,NULL,1,1,"Пашня, Верховая езда","Trot, Canter, Jump, Gallop"
+11,Eeyore,Donkey,2017-09-18,78,2,0,NULL,NULL,1,3,Поход,NULL
+12,Storm,Horse,2014-05-05,118,1,0,NULL,NULL,1,4,NULL,"Trot, Canter, Jump"
+14,Burro,Donkey,2019-01-23,62,4,0,NULL,NULL,1,6,NULL,"Walk, Bray, Kick"
+15,Blaze,Horse,2016-02-29,97,3,0,NULL,NULL,1,7,NULL,"Trot, Canter, Jump, Gallop"
