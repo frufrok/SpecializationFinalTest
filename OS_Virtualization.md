@@ -31,7 +31,7 @@ user@ubuntuserver:~$ls
 HumanFriends.txt  PackAnimals.txt  Pets.txt  WindowsShared
 ```
 
-# 1. Работа с директориями в Linux
+# 2. Работа с директориями в Linux
 
 Приведены введенные команды и результат их исполнения.
 

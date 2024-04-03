@@ -1,6 +1,30 @@
 # SpecializationFinalTest
 Итоговая контрольная работа по блоку специализация на GeekBrains.
 
+# Решение
+
+1. [Использование команды cat в Linux ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/OS_Virtualization.md)
+
+2. [Работа с директориями в Linux ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/OS_Virtualization.md)
+
+3. [Работа с MySQL в Linux. ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/OS_Virtualization.md)
+
+4. [Управление deb-пакетами ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/OS_Virtualization.md)
+
+5. [История команд в терминале Ubuntu ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/OS_Virtualization.md)
+
+6. [Диаграмма классов ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/%D0%94%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0_%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%BE%D0%B2.drawio.html)
+
+7. Работа с MySQL ✓
+   - [MySQL Script](https://github.com/frufrok/SpecializationFinalTest/blob/main/MySQL_Script.sql)
+   - [MySQL Query Result](https://github.com/frufrok/SpecializationFinalTest/blob/main/MySQL_Result.csv)
+
+8. [ООП и Java ✓](https://github.com/frufrok/SpecializationFinalTest/tree/main/srs/main/java/HumanFriends)
+
+9. [Программа-реестр домашних животных ✓](https://github.com/frufrok/SpecializationFinalTest/tree/main/srs/main/java/PetRegister)
+
+10. [Счетчик животных ✓](https://github.com/frufrok/SpecializationFinalTest/blob/main/srs/main/java/HumanFriends/Counter.java)
+
 # Задание
 
 ## Операционные системы и виртуализация (Linux)
@@ -98,8 +122,3 @@ Desktop Documents Downloads  HumanFriends.txt  Music  PackAnimals.txt  Pets.txt 
         
 10. Счетчик животных  ✓
 Создать механизм, который позволяет вывести на экран общее количество созданных животных любого типа (Как домашних, так и вьючных), то есть при создании каждого нового животного счетчик увеличивается на “1”.  ✓
-
-
-# Решение
-
-✓ - выполненные задачи
