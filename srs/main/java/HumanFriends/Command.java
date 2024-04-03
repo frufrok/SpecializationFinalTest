@@ -11,9 +11,13 @@ public class Command {
         this.name = name;
     }
 
+    public Command(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return String.format("Command to %s", this.name);
+        return String.format("Command %s", this.name);
     }
 
     @Override

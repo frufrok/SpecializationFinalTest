@@ -1,6 +1,7 @@
 ﻿package HumanFriends;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 public class Animal {
 
@@ -78,12 +79,35 @@ public class Animal {
         this.isIll = false;
     }
 
+    private HashSet<Command> commands = new HashSet<>();
+
+    public HashSet<Command> getCommands() {
+        return this.commands;
+    }
+
+    public void addCommand(Command command) {
+        this.commands.add(command);
+    }
+
+    public void forgetCommand(Command command) {
+        this.commands.remove(command);
+    }
+
     public Animal(String name, String kind, LocalDate birthDate) {
         this.name = name;
         this.kind = kind;
         this.birthDate = birthDate;
         Counter.increaseAnimalsCount();
         this.id = Counter.getAnimalsCount();
+    }
+
+    public void doCommand(Command command) {
+        if (this.commands.contains(command)) {
+            System.out.println(this.toString() + String.format(" done %s", command));
+        }
+        else {
+            System.out.println(this.toString() + String.format(" can't do %s", command));
+        }
     }
     
     @Override
